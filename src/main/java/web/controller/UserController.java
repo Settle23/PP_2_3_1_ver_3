@@ -27,7 +27,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public String getUserById(@PathVariable("id") long id, Model model) {
+    public String getUserById(@RequestParam(value =  "id", required = false) long id, Model model) {
         model.addAttribute("user", userService.getUserById(id));
         return "user";
     }
@@ -48,13 +48,13 @@ public class UserController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public String deleteUserById(@PathVariable("id") long id) {
+    public String deleteUserById(@RequestParam(value = "id", required = false) long id) {
         userService.removeUser(id);
         return "redirect:/";
     }
 
     @GetMapping("edit/{id}")
-    public String getUserUpdateForm(@PathVariable("id") long id, Model model) {
+    public String getUserUpdateForm(@RequestParam(value = "id", required = false) long id, Model model) {
         model.addAttribute(userService.getUserById(id));
         return "edit";
     }
