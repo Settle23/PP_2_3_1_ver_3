@@ -28,12 +28,12 @@
         <td th:utext="${users.age}">Age</td>
         <td th:utext="${users.email}">Email</td>
         <td>
-            <form th:action="@{'edit/' + ${users.userId}}">
+            <form th:action="@{edit (id=${users.getUserId()})}">
                 <input type="submit" class="buttonEdit" value="Edit"/>
             </form>
         </td>
         <td>
-            <form th:method="DELETE" th:action="@{'delete/' + ${users.userId}}">
+            <form th:method="POST" th:action="@{/(id=${users.getUserId()})}">
                 <input type="submit" class="buttonDelete" value="Delete"/>
             </form>
         </td>

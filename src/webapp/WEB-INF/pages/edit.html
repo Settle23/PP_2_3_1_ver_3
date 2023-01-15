@@ -7,12 +7,12 @@
 </head>
 <body>
 <h1>Edit user</h1>
-<form action="#" th:method="PATCH" th:action="@{/edit}" th:object="${user}">
+<form th:method="POST" th:action="@{/edit (id = ${user.getUserId()})}" th:object="${user}">
     <table>
         <tr>
             <td>
                 <label for="userId">UserId</label>
-                <input readonly type="number" th:field="*{userId}" id="userId" placeholder="UserId">
+                <input readonly type="number" th:field="*{userID}" id="userId" placeholder="UserId">
             </td>
         </tr>
         <tr>

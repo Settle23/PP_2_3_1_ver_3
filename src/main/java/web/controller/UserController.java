@@ -26,8 +26,8 @@ public class UserController {
         return "users";
     }
 
-    @GetMapping("/{id}")
-    public String getUserById(@RequestParam(value =  "id", required = false) long id, Model model) {
+    @GetMapping("/id")
+    public String getUserById(@RequestParam(value = "id") long id, Model model) {
         model.addAttribute("user", userService.getUserById(id));
         return "user";
     }
@@ -47,25 +47,22 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("/delete/{id}")
+    @PostMapping("/")
     public String deleteUserById(@RequestParam(value = "id", required = false) long id) {
         userService.removeUser(id);
         return "redirect:/";
     }
 
-    @GetMapping("edit/{id}")
+    @GetMapping("/edit")
     public String getUserUpdateForm(@RequestParam(value = "id", required = false) long id, Model model) {
-        model.addAttribute(userService.getUserById(id));
+        model.addAttribute("user", userService.getUserById(id));
         return "edit";
     }
 
-    @PatchMapping("/edit")
-    public String updateUserData(@Valid User user, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "edit";
-        } else {
-            userService.updateUser(user);
-            return "redirect:/";
-        }
+    @PostMapping("/edit")
+    public String updateUserData(@RequestParam ("id") long id, User user) {
+        user.setUserId(id);
+        userService.updateUser(user);
+        return "redirect:/";
     }
 }
